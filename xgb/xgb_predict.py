@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import pickle
+import joblib
 import subprocess
 from xgboost import XGBClassifier
 
@@ -43,8 +43,7 @@ model.load_model(MODEL_PATH)
 y_proba = model.predict_proba(df_raw)
 
 # Load Label encoder
-with open(LE_PATH, 'rb') as f:
-    le = pickle.load(f)
+le = joblib.load(LE_PATH)
 if hasattr(le, "classes_"):
     class_names = le.classes_
 else:
